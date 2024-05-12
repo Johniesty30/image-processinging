@@ -1,0 +1,42 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Image Processing</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+    <body>
+        <div class="h1-container">
+            <h1>Image Processing</h1>
+        </div>
+        <form action="/process" method="post" enctype="multipart/form-data">
+            <label for="image">Select an image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required><br><br>
+            <label for="operation">Choose the operation:</label>
+            <select id="operation" name="operation">
+                <option value="grayscale_luminosity">Grayscaling - Luminosity</option>
+                <option value="grayscale_average">Grayscaling - Average</option>
+                <option value="gaussian_smoothing">Gaussian Smoothing</option>
+                <option value="sobel_edge_detection">Sobel Edge Detection</option>
+                <option value="red_tint">Red Tint</option>
+                <option value="yellow_tint">Yellow Tint</option>
+                <option value="green_tint">Green Tint</option>
+            </select><br><br>
+            <div id="sigma_input" style="display: none;">
+                <label for="sigma">Sigma value:</label>
+                <input type="number" id="sigma" name="sigma" step="0.1">
+            </div>
+            <script>
+                document.getElementById('operation').addEventListener('change', function() {
+                    if (this.value === 'gaussian_smoothing') {
+                        document.getElementById('sigma_input').style.display = 'block';
+                    } else {
+                        document.getElementById('sigma_input').style.display = 'none';
+                    }
+                });
+            </script>
+            <button type="submit">Process</button>
+        </form>
+    </body>
+    </html>
